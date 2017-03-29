@@ -1,2 +1,6 @@
+.nvmrc
 .babelrc
+README.md.tpl
 src/
+scripts/
+example/
