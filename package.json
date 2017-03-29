@@ -1,0 +1,32 @@
+{
+  "name": "react-test-renderer-utils",
+  "version": "1.0.0",
+  "description": "Helper functions for rendering and querying JSON tree produced by ReactTestRenderer.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "npm run build:lib && npm run build:readme",
+    "build:lib": "rimraf lib && babel --source-maps --ignore '**/*.spec.js' src --out-dir lib",
+    "build:readme": "node scripts/build-readme -t example:example/example.spec.js < README.md.tpl > README.md"
+  },
+  "author": "Donatas Petrauskas <donatasp@wix.com>",
+  "license": "MIT",
+  "repository": "wix/react-test-renderer-utils",
+  "peerDependencies": {
+    "react": "^15.4.2",
+    "react-test-renderer": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-jest": "^19.0.0",
+    "babel-preset-react-native": "^1.9.1",
+    "jest": "^19.0.2",
+    "react": "^15.4.2",
+    "react-native": "^0.42.3",
+    "rimraf": "^2.6.1",
+    "react-test-renderer": "^15.4.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
