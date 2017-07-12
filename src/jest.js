@@ -5,7 +5,12 @@ export function rnMock(mockPackage) {
 export function selectiveMock(mockPackage, mockComponents) {
   jest.mock(mockPackage, () => {
     const real = require.requireActual(mockPackage);
-    const lib = {...real};
+    const lib = {};
+    for (const prop in real) {
+      if (real.hasOwnProperty(prop)) {
+        lib[prop] = real[prop];
+      }
+    }
     mockComponents.forEach((name) => {
       if (!real[name]) {
         throw new Error(`${name} does not exist in ${mockPackage}?!`);
