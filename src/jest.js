@@ -29,21 +29,19 @@ export function fullMock(mockPackage, mockComponents) {
   });
 }
 
-export function mock(name, real) {
+export function mock(name, real = {}) {
   const React = require('React');
   const comp = class extends React.Component {
     static displayName = real.displayName || name;
-    static propTypes = real.PropTypes;
+    static propTypes = real.propTypes;
     render() {
       return React.createElement(name, this.props, this.props.children);
     }
   };
   for (const prop in real) {
-    /* eslint-disable no-prototype-builtins */
     if (real.hasOwnProperty(prop) && typeof real[prop] !== 'function') {
       comp[prop] = real[prop];
     }
-    /* eslint-enable no-prototype-builtins */
   }
   return comp;
 }
