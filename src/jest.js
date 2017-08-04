@@ -1,32 +1,33 @@
-export function rnMock(mockPackage) {
-  jest.mock(mockPackage, () => mock(mockPackage, require.requireActual(mockPackage)));
-}
-
-export function selectiveMock(mockPackage, mockComponents) {
-  jest.mock(mockPackage, () => {
-    const real = require.requireActual(mockPackage);
-    const lib = {};
-    for (const prop in real) {
-      if (real.hasOwnProperty(prop)) {
-        lib[prop] = real[prop];
-      }
+export function mockPartial(realPackage, mockComponents) {
+  const lib = {};
+  for (const prop in realPackage) {
+    if (realPackage.hasOwnProperty(prop)) {
+      lib[prop] = realPackage[prop];
     }
-    mockComponents.forEach((name) => {
-      if (!real[name]) {
-        throw new Error(`${name} does not exist in ${mockPackage}?!`);
+  }
+  mockComponents.forEach((name) => {
+    const resetOfPath = name.split(/\./);
+    const path = [];
+    let source = realPackage;
+    let target = lib;
+    let currentName;
+    while ((currentName = resetOfPath.shift())) {
+      path.push(currentName);
+      if (!source[currentName]) {
+        throw new Error(`${path.join('.')} does not exist in mocked package?!`);
       }
-      lib[name] = mock(name, real[name]);
-    });
-    return lib;
+      target[currentName] = mock(path.join('.'), source[currentName]);
+      target = target[currentName];
+      source = source[currentName];
+    }
   });
+  return lib;
 }
 
-export function fullMock(mockPackage, mockComponents) {
-  jest.mock(mockPackage, () => {
-    const lib = {};
-    mockComponents.forEach((name) => lib[name] = mock(name, {displayName: name}));
-    return lib;
-  });
+export function mockFull(mockComponents) {
+  const lib = {};
+  mockComponents.forEach((name) => lib[name] = mock(name, {displayName: name}));
+  return lib;
 }
 
 export function mock(name, real = {}) {
@@ -39,7 +40,7 @@ export function mock(name, real = {}) {
     }
   };
   for (const prop in real) {
-    if (real.hasOwnProperty(prop) && typeof real[prop] !== 'function') {
+    if (real.hasOwnProperty(prop)) {
       comp[prop] = real[prop];
     }
   }
