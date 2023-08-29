@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "npm run build:lib && npm run build:readme",
     "build:lib": "rimraf lib && babel --source-maps --ignore '**/*.spec.js' src --out-dir lib",
-    "build:readme": "node scripts/build-readme -t example:example/example.spec.js < README.md.tpl > README.md"
+    "build:readme": "node scripts/build-readme -t example:example/example.spec.js < _README.md.tpl > README.md"
   },
   "author": "Donatas Petrauskas <donatasp@wix.com>",
   "license": "MIT",
