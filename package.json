@@ -1,6 +1,6 @@
 {
   "name": "react-test-renderer-utils",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Helper functions for rendering and querying JSON tree produced by ReactTestRenderer.",
   "main": "lib/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "author": "Donatas Petrauskas <donatasp@wix.com>",
   "license": "MIT",
-  "repository": "wix/react-test-renderer-utils",
+  "repository": "wix-incubator/react-test-renderer-utils",
   "peerDependencies": {
     "react": "*",
     "react-test-renderer": "*"
