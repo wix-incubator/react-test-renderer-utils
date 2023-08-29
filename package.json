@@ -13,8 +13,8 @@
   "license": "MIT",
   "repository": "wix/react-test-renderer-utils",
   "peerDependencies": {
-    "react": "^15.4.2",
-    "react-test-renderer": "^15.4.2"
+    "react": "*",
+    "react-test-renderer": "*"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
