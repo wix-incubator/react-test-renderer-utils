@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {mock, mockPartial} from './jest';
 
 describe('jest helpers', () => {

@@ -31,7 +31,7 @@ export function mockFull(mockComponents) {
 }
 
 export function mock(name, real = {}) {
-  const React = require('React');
+  const React = require('react');
   const comp = class extends React.Component {
     static displayName = real.displayName || name;
     static propTypes = real.propTypes;
